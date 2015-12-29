@@ -149,7 +149,7 @@ public class InteractShop implements Listener {
 							e.setCancelled(true);
 							Shop shop = ShopUtils.getShop(b.getLocation());
 
-							if (p.getUniqueId().equals(shop.getVendor().getUniqueId())) {
+							if (!shop.isInfinite() && p.getUniqueId().equals(shop.getVendor().getUniqueId())) {
 								e.setCancelled(false);
 								return;
 							} else {
@@ -202,7 +202,7 @@ public class InteractShop implements Listener {
 					if (ShopUtils.isShop(b.getLocation())) {
 						Shop shop = ShopUtils.getShop(b.getLocation());
 
-						if (!p.getUniqueId().equals(shop.getVendor().getUniqueId())) {
+						if (shop.isInfinite() || !p.getUniqueId().equals(shop.getVendor().getUniqueId())) {
 							if (shop.getSellPrice() > 0) {
 								if (perm.has(p, "shopchest.sell")) {
 									if (Utils.getAmount(p.getInventory(), shop.getProduct().getType(),
